@@ -1,18 +1,48 @@
-import { UserRepository } from "../application/user.repository";
-import { UserModel } from "../domain/user.model";
+import { UserRepository } from "@user/application/user.repository";
+import { UserModel } from "@user/domain/user.model";
 
-const users = [
-  { name: "Juan", age: 20 },
-  { name: "Pedro", age: 30 },
-  { name: "Maria", age: 40 },
+const users: UserModel[] = [
+  {
+    name: "Juan",
+    lastname: "Carbajal",
+    email: "juan@gmail.com",
+    password: "123456",
+    refreshToken: "",
+    roles: [],
+    active: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    name: "Juan",
+    lastname: "Carbajal",
+    email: "juan@gmail.com",
+    password: "123456",
+    refreshToken: "",
+    roles: [],
+    active: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    name: "Juan",
+    lastname: "Carbajal",
+    email: "juan@gmail.com",
+    password: "123456",
+    refreshToken: "",
+    roles: [],
+    active: true,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
 ];
 
 export default class implements UserRepository {
   list(): UserModel[] {
     return users;
   }
-  getOne(age: number): UserModel {
-    const user = users.find((el) => el.age === age);
+  getOne(email: string): UserModel {
+    const user = users.find((el) => el.email === email);
     if (user) {
       return user;
     }

@@ -1,6 +1,6 @@
 import { Application } from "express";
 import http from "http";
-import IBootstrap from "./bootstrap.interface";
+import IBootstrap from "@bootstrap/bootstrap.interface";
 
 export default class implements IBootstrap {
   constructor(private app: Application) {}

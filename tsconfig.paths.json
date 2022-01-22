@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@bootstrap/*": ["src/bootstrap/*"],
+      "@user/*": ["src/user/*"],
+      "@role/*": ["src/role/*"],
+      "@medic/*": ["src/medic/*"],
+      "@driver/*": ["src/driver/*"],
+      "@history/*": ["src/history/*"],
+      "@shared/*": ["src/shared/*"]
+    }
+  }
+}

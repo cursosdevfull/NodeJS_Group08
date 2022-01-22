@@ -1,5 +1,5 @@
-import { UserModel } from "../domain/user.model";
-import { UserRepository } from "./user.repository";
+import { UserModel } from "@user/domain/user.model";
+import { UserRepository } from "@user/application/user.repository";
 
 export default class {
   constructor(private userRepository: UserRepository) {}
@@ -8,8 +8,8 @@ export default class {
     return this.userRepository.list();
   }
 
-  getOne(age: number) {
-    return this.userRepository.getOne(age);
+  getOne(email: string) {
+    return this.userRepository.getOne(email);
   }
 
   insert(user: UserModel) {

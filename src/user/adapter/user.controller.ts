@@ -1,18 +1,16 @@
-import UserUseCase from "../application/user.usecase";
-import UserOperation from "../infraestruture/user.operation";
-
-const userOperation = new UserOperation();
-const userUseCase = new UserUseCase(userOperation);
+import UserUseCase from "@user/application/user.usecase";
 
 export default class {
+  constructor(private userUseCase: UserUseCase) {}
+
   list(request: any, response: any) {
     response.writeHead(200, { "content-type": "application/json" });
-    response.write(JSON.stringify(userUseCase.list()));
+    response.write(JSON.stringify(this.userUseCase.list()));
     response.end();
   }
 
   getOne(request: any, response: any) {
-    const age = +request.params.age;
+    const email = request.params.email;
     /*     const users = [
       { name: "Juan", age: 20 },
       { name: "Pedro", age: 30 },
@@ -21,7 +19,7 @@ export default class {
 
     const userFiltered = users.filter((user) => user.age === age); */
     response.writeHead(200, { "content-type": "application/json" });
-    response.write(JSON.stringify(userUseCase.getOne(age)));
+    response.write(JSON.stringify(this.userUseCase.getOne(email)));
     response.end();
   }
 

@@ -1,11 +1,7 @@
-import ServerBootstrap from "./bootstrap/server.bootstrap";
+import ServerBootstrap from "@bootstrap/server.bootstrap";
 import app from "./app";
 
 const serverBootstrap = new ServerBootstrap(app);
-
-/* const start = async () => {
-  await serverBootstrap.initialize();
-}; */
 
 (async () => {
   try {
