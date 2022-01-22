@@ -19,6 +19,7 @@ export default class {
 
     const userFiltered = users.filter((user) => user.age === age); */
     response.writeHead(200, { "content-type": "application/json" });
+    console.log(email);
     response.write(JSON.stringify(this.userUseCase.getOne(email)));
     response.end();
   }

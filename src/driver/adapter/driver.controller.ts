@@ -5,27 +5,27 @@ export default class {
   constructor(private driverUseCase: DriverUseCase) {}
 
   list(request: Request, response: Response) {
-    response.writeHead(200, { "content-type": "application/json" });
-    response.write(JSON.stringify(this.driverUseCase.list()));
-    response.end();
+    response.json(this.driverUseCase.list());
   }
 
-  /*
-    update(id: ID, entity: T): T {
-    return entity;
+  insert(request: Request, response: Response) {
+    const body = request.body;
+    response.json(this.driverUseCase.insert(body));
   }
-  delete(id: ID): T {
-    return {} as T;
+
+  update(request: Request, response: Response) {
+    const id = +request.params.id;
+    const body = request.body;
+    response.json(this.driverUseCase.update(id, body));
   }
-  list(): T[] {
-    return [] as T[];
+
+  delete(request: Request, response: Response) {
+    const id = +request.params.id;
+    response.json(this.driverUseCase.delete(id));
   }
-  getOne(id: ID): T {
-    return {} as T;
+
+  getOne(request: Request, response: Response) {
+    const id = +request.params.id;
+    response.json(this.driverUseCase.getOne(id));
   }
-  insert(entity: T): T {
-    return entity;
-  }
-  
-  */
 }

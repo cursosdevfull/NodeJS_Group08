@@ -10,7 +10,7 @@ const route = express.Router();
 const controller = new Controller(userUseCase);
 
 route.get("/", controller.list.bind(controller));
-route.get("/:age", controller.getOne);
-route.post("/", controller.insert);
+route.get("/:email", controller.getOne.bind(controller));
+route.post("/", controller.insert.bind(controller));
 
 export default route;
