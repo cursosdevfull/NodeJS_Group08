@@ -28,6 +28,9 @@ export class User {
   /*  @OneToMany((type) => Car, (car) => car.user, { cascade: true })
   cars: Car[]; */
 
-  @ManyToMany((type) => Car, (car) => car.users /* , { cascade: true } */)
-  cars: Promise<Car[]>;
+  /*@ManyToMany((type) => Car, (car) => car.users , { cascade: true } )
+  cars: Promise<Car[]>;*/
+
+  @ManyToMany((type) => Car, (car) => car.users)
+  cars: Car[];
 }
