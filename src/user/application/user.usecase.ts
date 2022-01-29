@@ -1,4 +1,4 @@
-import { UserModel } from "@user/domain/user.model";
+/* import { UserModel } from "@user/domain/user.model";
 import { UserRepository } from "@user/application/user.repository";
 
 export default class {
@@ -16,3 +16,4 @@ export default class {
     return this.userRepository.insert(user);
   }
 }
+ */

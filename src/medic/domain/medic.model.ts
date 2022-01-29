@@ -1,9 +1,12 @@
 export interface MedicModel {
+  id?: number;
   name: string;
-  lastname: string;
+  maternal_surname: string;
+  paternal_surname: string;
   cmp: number;
-  photo: string;
-  active: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  document: string;
+  typeDocument: number;
+  active?: boolean;
+  dateCreated?: Date;
+  dateUpdated?: Date;
 }

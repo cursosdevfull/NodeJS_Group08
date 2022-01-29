@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import routerUser from "@user/adapter/user.route";
 import routerDriver from "@driver/adapter/driver.route";
-
+import routerMedic from "@medic/adapter/medic.route";
 class App {
   expressApp: Application;
 
@@ -20,6 +20,7 @@ class App {
   mountRoutes() {
     this.expressApp.use("/users", routerUser);
     this.expressApp.use("/drivers", routerDriver);
+    this.expressApp.use("/medics", routerMedic);
   }
 
   mountErrors() {

@@ -19,10 +19,16 @@
   },
   "homepage": "https://github.com/cursosdevfull/NodeJS_Group08#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "lodash": "^4.17.21",
+    "mysql2": "^2.3.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.41",
+    "yenv": "^3.0.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/lodash": "^4.14.178",
     "nodemon": "^2.0.15",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.12.0",

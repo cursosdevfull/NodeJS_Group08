@@ -1,4 +1,4 @@
-import UserUseCase from "@user/application/user.usecase";
+/* import UserUseCase from "@user/application/user.usecase";
 
 export default class {
   constructor(private userUseCase: UserUseCase) {}
@@ -11,13 +11,6 @@ export default class {
 
   getOne(request: any, response: any) {
     const email = request.params.email;
-    /*     const users = [
-      { name: "Juan", age: 20 },
-      { name: "Pedro", age: 30 },
-      { name: "Maria", age: 40 },
-    ];
-
-    const userFiltered = users.filter((user) => user.age === age); */
     response.writeHead(200, { "content-type": "application/json" });
     console.log(email);
     response.write(JSON.stringify(this.userUseCase.getOne(email)));
@@ -30,3 +23,4 @@ export default class {
     response.end();
   }
 }
+ */

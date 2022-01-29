@@ -1,4 +1,4 @@
-import { DriverUseCase } from "@driver/application/driver.usecase";
+/* import { DriverUseCase } from "@driver/application/driver.usecase";
 import { Request, Response } from "express";
 
 export default class {
@@ -29,3 +29,4 @@ export default class {
     response.json(this.driverUseCase.getOne(id));
   }
 }
+ */

@@ -1,19 +1,72 @@
-import { ID } from "@shared/values/id.type";
+import Result from "@shared/application/result.interface";
+import { getRepository, ObjectType, Repository } from "typeorm";
+import { ResponseDto } from "./response.dto";
+import * as _ from "lodash";
 
-export class BaseOperation<T> {
-  update(id: ID, entity: T): T {
-    return entity;
+export default abstract class BaseOperation<T> {
+  constructor(private entity: ObjectType<T>) {}
+
+  async list(
+    where: object,
+    relations: string[],
+    order: object
+  ): Promise<Result<T>> {
+    const repository: Repository<T> = getRepository(this.entity);
+    const data: T[] = await repository.find({ where, relations, order });
+
+    return ResponseDto.format("", data);
   }
-  delete(id: ID): T {
-    return {} as T;
+
+  async getOne(where: object, relations: string[]): Promise<Result<T>> {
+    const repository: Repository<T> = getRepository(this.entity);
+    const data: T = await repository.findOne({ where, relations });
+
+    return ResponseDto.format("", data);
   }
-  list(): T[] {
-    return [] as T[];
+
+  async getPage(
+    page: number,
+    pageSize: number,
+    where: object,
+    relations: string[],
+    order: object
+  ): Promise<Result<T>> {
+    const repository: Repository<T> = getRepository(this.entity);
+    const [data, total] = await repository.findAndCount({
+      where,
+      relations,
+      order,
+      skip: page * pageSize,
+      take: pageSize,
+    });
+
+    return ResponseDto.format("", data, total);
   }
-  getOne(id: ID): T {
-    return {} as T;
+
+  async insert(entity: T): Promise<Result<T>> {
+    const repository: Repository<T> = getRepository(this.entity);
+    const instance = repository.create(entity);
+    const data: T = await repository.save(instance);
+
+    return ResponseDto.format("", data);
   }
-  insert(entity: T): T {
-    return entity;
+
+  async update(
+    entity: Partial<T>,
+    where: object,
+    relations: string[]
+  ): Promise<Result<T>> {
+    const repository: Repository<T> = getRepository(this.entity);
+    let recordToUpdate: any = await repository.findOne({ where, relations });
+
+    recordToUpdate = _.merge(recordToUpdate, entity);
+
+    await repository.save(recordToUpdate);
+
+    return ResponseDto.format("", recordToUpdate);
+  }
+
+  delete(where: object): Promise<Result<T>> {
+    throw new Error("Not implemented");
   }
 }
