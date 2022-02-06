@@ -1,14 +1,12 @@
-import MedicUseCase from "@medic/application/medic.usecase";
-import { MedicModel } from "@medic/domain/medic.model";
+import RoleUseCase from "@role/application/role.usecase";
+import { RoleModel } from "@role/domain/role.model";
 import { Request, Response } from "express";
 
-export default class MedicController {
-  constructor(private useCase: MedicUseCase) {}
+export default class RoleController {
+  constructor(private useCase: RoleUseCase) {}
 
   async list(req: Request, res: Response) {
     const results = await this.useCase.list({}, [], {
-      paternal_surname: "ASC",
-      maternal_surname: "ASC",
       name: "ASC",
     });
 
@@ -25,8 +23,6 @@ export default class MedicController {
   async getPage(req: Request, res: Response) {
     const page = +req.params.page;
     const results = await this.useCase.getPage(page, {}, [], {
-      paternal_surname: "ASC",
-      maternal_surname: "ASC",
       name: "ASC",
     });
 
@@ -35,16 +31,12 @@ export default class MedicController {
 
   async insert(req: Request, res: Response) {
     const body = req.body;
-    const medic: MedicModel = {
+    const role: RoleModel = {
       name: body.name,
-      paternal_surname: body.paternal_surname,
-      maternal_surname: body.maternal_surname,
-      cmp: body.cmp,
-      document: body.document,
-      typeDocument: body.typeDocument,
+      actions: body.actions,
     };
 
-    const results = await this.useCase.insert(medic);
+    const results = await this.useCase.insert(role);
 
     res.json(results);
   }
@@ -64,17 +56,5 @@ export default class MedicController {
     const result = await this.useCase.delete(where);
 
     res.json(result);
-  }
-
-  async getUniqueMedic(req: Request, res: Response) {
-    const results = await this.useCase.getUniqueMedic();
-
-    res.json(results);
-  }
-
-  async getReportMedic(req: Request, res: Response) {
-    const results = await this.useCase.getReportMedic();
-
-    res.json(results);
   }
 }

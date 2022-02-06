@@ -1,8 +1,5 @@
-/* import { UserModel } from "@user/domain/user.model";
+import { UserModel } from "@user/domain/user.model";
+import { BaseRepository } from "@shared/application/base.repository";
+import Result from "@shared/application/result.interface";
 
-export interface UserRepository {
-  list(): UserModel[];
-  getOne(email: string): UserModel;
-  insert(user: UserModel): UserModel;
-}
- */
+export default interface UserRepository extends BaseRepository<UserModel> {}

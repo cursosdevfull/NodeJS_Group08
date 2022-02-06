@@ -10,6 +10,8 @@ const controller = new MedicController(useCase);
 const route = express.Router();
 
 route.get("/", controller.list.bind(controller));
+route.get("/unique", controller.getUniqueMedic.bind(controller));
+route.get("/report", controller.getReportMedic.bind(controller));
 route.get("/:id", controller.getOne.bind(controller));
 route.get("/page/:page", controller.getPage.bind(controller));
 route.post("/", controller.insert.bind(controller));

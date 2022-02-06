@@ -1,26 +1,65 @@
-/* import UserUseCase from "@user/application/user.usecase";
+import UserUseCase from "@user/application/user.usecase";
+import { UserModel } from "@user/domain/user.model";
+import { Request, Response } from "express";
 
-export default class {
-  constructor(private userUseCase: UserUseCase) {}
+export default class UserController {
+  constructor(private useCase: UserUseCase) {}
 
-  list(request: any, response: any) {
-    response.writeHead(200, { "content-type": "application/json" });
-    response.write(JSON.stringify(this.userUseCase.list()));
-    response.end();
+  async list(req: Request, res: Response) {
+    const results = await this.useCase.list({}, [], {
+      lastname: "ASC",
+      name: "ASC",
+    });
+
+    res.json(results);
   }
 
-  getOne(request: any, response: any) {
-    const email = request.params.email;
-    response.writeHead(200, { "content-type": "application/json" });
-    console.log(email);
-    response.write(JSON.stringify(this.userUseCase.getOne(email)));
-    response.end();
+  async getOne(req: Request, res: Response) {
+    const where = { id: +req.params.id };
+    const results = await this.useCase.getOne(where);
+
+    res.json(results);
   }
 
-  insert(request: any, response: any) {
-    response.writeHead(200, { "content-type": "text/html" });
-    response.write("<h1>Hello World/h1>");
-    response.end();
+  async getPage(req: Request, res: Response) {
+    const page = +req.params.page;
+    const results = await this.useCase.getPage(page, {}, [], {
+      lastname: "ASC",
+      name: "ASC",
+    });
+
+    res.json(results);
+  }
+
+  async insert(req: Request, res: Response) {
+    const body = req.body;
+    const user: Partial<UserModel> = {
+      name: body.name,
+      lastname: body.lastname,
+      email: body.email,
+      password: body.password,
+      roles: body.roles,
+    };
+
+    const results = await this.useCase.insert(user);
+
+    res.json(results);
+  }
+
+  async update(req: Request, res: Response) {
+    const body = req.body;
+    const where = { id: +req.params.id };
+
+    const result = await this.useCase.update(body, where);
+
+    res.json(result);
+  }
+
+  async delete(req: Request, res: Response) {
+    const where = { id: +req.params.id };
+
+    const result = await this.useCase.delete(where);
+
+    res.json(result);
   }
 }
- */

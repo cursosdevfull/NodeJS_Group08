@@ -19,7 +19,4 @@ export type ACTION = ACTION_USER & ACTION_MEDIC & ACTION_EXPORT;
 export interface RoleModel {
   name: string;
   actions: ACTION[];
-  active: boolean;
-  createdAt: Date;
-  updatedAt: Date;
 }
