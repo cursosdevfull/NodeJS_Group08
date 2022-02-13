@@ -10,5 +10,9 @@ const controller = new AuthController(useCase);
 const route = express.Router();
 
 route.post("/login", controller.login.bind(controller));
+route.get(
+  "/request-new-access-token/:refreshToken",
+  controller.getNewAccessToken.bind(controller)
+);
 
 export default route;

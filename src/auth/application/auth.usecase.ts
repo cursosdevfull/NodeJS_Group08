@@ -43,4 +43,28 @@ export class AuthUseCase {
       return null;
     }
   }
+
+  async getNewAccessToken(
+    entity: Partial<UserModel>
+  ): Promise<Result<TokensModel>> {
+    const result: Result<UserModel> = await this.repository.getOne(
+      { refreshToken: entity.refreshToken },
+      ["roles"]
+    );
+    const userMatched: UserModel = result.payload.data as UserModel;
+
+    if (userMatched) {
+      if (compareAsc(new Date(), userMatched.dateExpirationRefreshToken) > 0) {
+        return null;
+      }
+
+      const tokens: TokensModel = {
+        accessToken: UserService.generateAccessToken(userMatched),
+        refreshToken: userMatched.refreshToken,
+      };
+      return ResponseDto.format("", tokens);
+    } else {
+      return null;
+    }
+  }
 }

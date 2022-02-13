@@ -1,6 +1,16 @@
+import { IError } from "@shared/helpers/errors.helper";
 import UserUseCase from "@user/application/user.usecase";
 import { UserModel } from "@user/domain/user.model";
 import { Request, Response } from "express";
+
+const functionReject = () =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const error: IError = new Error("error de promesa");
+      error.status = 502;
+      reject(error);
+    }, 2000);
+  });
 
 export default class UserController {
   constructor(private useCase: UserUseCase) {}
@@ -10,6 +20,8 @@ export default class UserController {
       lastname: "ASC",
       name: "ASC",
     });
+
+    // const results = await functionReject();
 
     res.json(results);
   }

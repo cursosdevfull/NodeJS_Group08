@@ -4,6 +4,7 @@ import routerDriver from "@driver/adapter/driver.route";
 import routerMedic from "@medic/adapter/medic.route";
 import routerRole from "@role/adapter/role.route";
 import routerAuth from "@auth/adapter/auth.route";
+import errorHelper from "@shared/helpers/errors.helper";
 class App {
   expressApp: Application;
 
@@ -28,11 +29,8 @@ class App {
   }
 
   mountErrors() {
-    this.expressApp.use("**", (request: any, response: any) => {
-      response.writeHead(404, { "content-type": "text/plain" });
-      response.write("Not found");
-      response.end();
-    });
+    this.expressApp.use(errorHelper.notFound);
+    this.expressApp.use(errorHelper.generic);
   }
 }
 

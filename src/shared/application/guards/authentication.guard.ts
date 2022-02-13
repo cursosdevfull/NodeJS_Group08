@@ -1,3 +1,6 @@
+import { ErrorResponse } from "@shared/interfaces/error-response.interface";
+import { IPayload } from "@shared/interfaces/payload.interface";
+import { UserService } from "@user/application/user.service";
 import { Request, Response, NextFunction } from "express";
 
 export class AuthenticationGuard {
@@ -13,6 +16,14 @@ export class AuthenticationGuard {
       res.status(401).send("Unauthorized");
     }
 
-    next();
+    UserService.validateAccessToken(parts[1]).then(
+      (payload: IPayload) => {
+        res.locals.payload = payload;
+        next();
+      },
+      (error: ErrorResponse) => {
+        res.status(error.status).send(error.message);
+      }
+    );
   }
 }

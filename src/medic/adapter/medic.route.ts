@@ -1,5 +1,6 @@
 import MedicUseCase from "@medic/application/medic.usecase";
 import MedicOperation from "@medic/infraestructure/medic.operation";
+import CacheRedis from "@shared/middlewares/cache.middleware";
 import express from "express";
 import MedicController from "./medic.controller";
 
@@ -9,7 +10,11 @@ const controller = new MedicController(useCase);
 
 const route = express.Router();
 
-route.get("/", controller.list.bind(controller));
+route.get(
+  "/",
+  CacheRedis.handle("MEDIC_LIST"),
+  controller.list.bind(controller)
+);
 route.get("/unique", controller.getUniqueMedic.bind(controller));
 route.get("/report", controller.getReportMedic.bind(controller));
 route.get("/:id", controller.getOne.bind(controller));
