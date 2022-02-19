@@ -1,7 +1,9 @@
+import Result from "@shared/application/result.interface";
 import { IError } from "@shared/helpers/errors.helper";
 import UserUseCase from "@user/application/user.usecase";
 import { UserModel } from "@user/domain/user.model";
 import { Request, Response } from "express";
+import { CustomException } from "../../shared/exceptions/custom.exception";
 
 const functionReject = () =>
   new Promise((resolve, reject) => {
@@ -16,13 +18,10 @@ export default class UserController {
   constructor(private useCase: UserUseCase) {}
 
   async list(req: Request, res: Response) {
-    const results = await this.useCase.list({}, [], {
+    const results: Result<UserModel> = await this.useCase.list({}, [], {
       lastname: "ASC",
       name: "ASC",
     });
-
-    // const results = await functionReject();
-
     res.json(results);
   }
 
@@ -31,6 +30,14 @@ export default class UserController {
     const results = await this.useCase.getOne(where);
 
     res.json(results);
+  }
+
+  async getPhoto(req: Request, res: Response) {
+    const where = { id: +req.params.id };
+    const results = await this.useCase.getPhoto(where);
+    const obj = Buffer.from(results.Body).toString("utf-8");
+
+    res.type("image/png").send(obj);
   }
 
   async getPage(req: Request, res: Response) {
@@ -51,6 +58,7 @@ export default class UserController {
       email: body.email,
       password: body.password,
       roles: body.roles,
+      photo: body.photo,
     };
 
     const results = await this.useCase.insert(user);

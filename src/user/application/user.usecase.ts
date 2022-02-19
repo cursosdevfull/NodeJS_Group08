@@ -5,17 +5,23 @@ import Result from "@shared/application/result.interface";
 import { UserService } from "./user.service";
 import RoleRepository from "@role/application/role.repository";
 import { RoleModel } from "@role/domain/role.model";
-import { add } from "date-fns";
+import { FamilyRefreshTokens } from "@entities/family-refresh-tokens.entity";
+import { FamilyRefreshTokensModel } from "src/family-refreshtokens/domain/family-refreshtokens.model";
+import { UserListDto } from "@user/domain/user-list.dto";
+import AWS from "aws-sdk";
+import yenv from "yenv";
 
+const S3 = new AWS.S3();
+const env = yenv();
 export default class UserUseCase extends BaseUseCase<
   UserModel,
   UserRepository
 > {
   constructor(
-    public repository: UserRepository,
+    public repositoryUser: UserRepository,
     private repositoryRole: RoleRepository
   ) {
-    super(repository);
+    super(repositoryUser);
   }
 
   override async insert(
@@ -23,7 +29,6 @@ export default class UserUseCase extends BaseUseCase<
   ): Promise<Result<UserModel>> {
     const user: UserModel = {
       ...entity,
-      refreshToken: UserService.generateRefreshToken(),
     } as UserModel;
 
     const listRolesPromises: any[] = [];
@@ -36,9 +41,42 @@ export default class UserUseCase extends BaseUseCase<
       (result: Result<RoleModel>) => result.payload.data as RoleModel
     );
 
-    user.password = await UserService.cryptPassword(user.password);
-    user.dateExpirationRefreshToken = add(new Date(), { months: 1 });
+    const refreshToken = UserService.generateRefreshToken();
+    const familyRT = new FamilyRefreshTokens();
+    familyRT.refreshToken = refreshToken;
 
-    return this.repository.insert(user);
+    const newModelRT: FamilyRefreshTokensModel = {
+      refreshToken: refreshToken,
+    };
+
+    user.familyRefreshTokens = [newModelRT];
+
+    user.password = await UserService.cryptPassword(user.password);
+
+    const userInserted: Result<UserModel> = await this.repositoryUser.insert(
+      user
+    );
+
+    return userInserted;
+  }
+
+  override async list(
+    where: object = {},
+    relations: string[] = [],
+    order: object = {}
+  ): Promise<Result<UserModel>> {
+    where = { ...where, active: true };
+    const list = await this.repository.list(where, relations, order);
+
+    return UserListDto.mapping(list);
+  }
+
+  async getPhoto(where: object): Promise<any> {
+    const result = await this.repository.getOne(where, []);
+    const user: UserModel = result.payload.data as UserModel;
+
+    const params = { Bucket: env.S3.bucketName, Key: user.photo };
+
+    return S3.getObject(params).promise();
   }
 }

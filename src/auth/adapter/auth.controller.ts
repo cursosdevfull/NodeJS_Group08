@@ -15,14 +15,18 @@ export default class AuthController {
     };
     const results = await this.useCase.login(user);
 
-    res.json(results);
+    if (results) {
+      return res.json(results);
+    }
+
+    res.status(401).send("User not found");
   }
 
   async getNewAccessToken(req: Request, res: Response) {
-    const user: Partial<UserModel> = req.params;
+    const { refreshToken } = req.params;
 
     const result: Result<TokensModel> = await this.useCase.getNewAccessToken(
-      user
+      refreshToken
     );
     if (result) {
       return res.json(result);

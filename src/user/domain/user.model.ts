@@ -1,4 +1,5 @@
 import { RoleModel } from "@role/domain/role.model";
+import { FamilyRefreshTokensModel } from "src/family-refreshtokens/domain/family-refreshtokens.model";
 
 export interface UserModel {
   id: number;
@@ -6,7 +7,7 @@ export interface UserModel {
   lastname: string;
   email: string;
   password: string;
-  refreshToken: string;
-  dateExpirationRefreshToken: Date;
+  familyRefreshTokens: FamilyRefreshTokensModel[];
   roles: RoleModel[] | string[];
+  photo: string;
 }

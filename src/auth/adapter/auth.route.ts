@@ -1,10 +1,12 @@
 import UserOperation from "@user/infraestructure/user.operation";
 import express from "express";
+import FamilyRefreshTokensOperation from "src/family-refreshtokens/infraestructure/family-refreshtokens.infraestructure";
 import { AuthUseCase } from "../application/auth.usecase";
 import AuthController from "./auth.controller";
 
-const operation = new UserOperation();
-const useCase = new AuthUseCase(operation);
+const operationUser = new UserOperation();
+const operationFamilyRefreshTokens = new FamilyRefreshTokensOperation();
+const useCase = new AuthUseCase(operationUser, operationFamilyRefreshTokens);
 const controller = new AuthController(useCase);
 
 const route = express.Router();

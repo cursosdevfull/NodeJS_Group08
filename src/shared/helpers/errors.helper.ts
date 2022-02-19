@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 
 export interface IError extends Error {
   status?: number;
+  code?: string;
 }
 
 export default class {
@@ -37,16 +38,14 @@ export default class {
   ) {
     const objError: IError = {
       name: error.name,
-      status: error.status,
+      status: error.status ? error.status : 500,
       message: error.message,
     };
-
-    console.log("Error: ", objError);
 
     if (process.env.NODE_ENV !== "production") {
       objError.stack = error.stack;
     }
 
-    res.status(error.status).json(objError);
+    res.status(error.status ? error.status : 500).json(objError);
   }
 }

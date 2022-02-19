@@ -3,7 +3,7 @@ import MedicRepository from "@medic/application/medic.repository";
 import { MedicModel } from "@medic/domain/medic.model";
 import Result from "@shared/application/result.interface";
 import BaseOperation from "@shared/infraestructure/base.operation";
-import { ResponseDto } from "@shared/infraestructure/response.dto";
+import { ResponseDto } from "@shared/application/response.dto";
 import { getRepository, Repository } from "typeorm";
 
 export default class MedicOperation

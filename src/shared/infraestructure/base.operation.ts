@@ -1,6 +1,6 @@
 import Result from "@shared/application/result.interface";
 import { getRepository, ObjectType, Repository } from "typeorm";
-import { ResponseDto } from "./response.dto";
+import { ResponseDto } from "../application/response.dto";
 import * as _ from "lodash";
 
 export default abstract class BaseOperation<T> {
@@ -57,13 +57,15 @@ export default abstract class BaseOperation<T> {
     relations: string[]
   ): Promise<Result<T>> {
     const repository: Repository<T> = getRepository(this.entity);
-    let recordToUpdate: any = await repository.findOne({ where, relations });
+    let recordsToUpdate: any[] = await repository.find({ where, relations });
 
-    recordToUpdate = _.merge(recordToUpdate, entity);
+    recordsToUpdate = recordsToUpdate.map((record: any) =>
+      _.merge(record, entity)
+    );
 
-    await repository.save(recordToUpdate);
+    await repository.save(recordsToUpdate);
 
-    return ResponseDto.format("", recordToUpdate);
+    return ResponseDto.format("", recordsToUpdate);
   }
 
   delete(where: object): Promise<Result<T>> {

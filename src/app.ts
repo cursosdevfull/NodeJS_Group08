@@ -5,14 +5,21 @@ import routerMedic from "@medic/adapter/medic.route";
 import routerRole from "@role/adapter/role.route";
 import routerAuth from "@auth/adapter/auth.route";
 import errorHelper from "@shared/helpers/errors.helper";
+import multer from "multer";
+import { AuthenticationGuard } from "@shared/application/guards/authentication.guard";
 class App {
   expressApp: Application;
 
   constructor() {
     this.expressApp = express();
+    this.init();
     this.mountMiddlewares();
     this.mountRoutes();
     this.mountErrors();
+  }
+
+  init() {
+    multer();
   }
 
   mountMiddlewares() {
@@ -21,7 +28,10 @@ class App {
   }
 
   mountRoutes() {
-    this.expressApp.use("/users", routerUser);
+    this.expressApp.use(
+      "/users",
+      /* AuthenticationGuard.canActivate,  */ routerUser
+    );
     this.expressApp.use("/drivers", routerDriver);
     this.expressApp.use("/medics", routerMedic);
     this.expressApp.use("/roles", routerRole);

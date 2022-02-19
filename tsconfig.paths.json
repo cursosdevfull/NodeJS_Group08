@@ -7,6 +7,7 @@
       "@medic/*": ["src/medic/*"],
       "@driver/*": ["src/driver/*"],
       "@history/*": ["src/history/*"],
+      "@family-refreshtokens/*": ["src/family-refreshtokens/*"],
       "@auth/*": ["src/auth/*"],
       "@shared/*": ["src/shared/*"],
       "@entities/*": ["src/entities/*"]

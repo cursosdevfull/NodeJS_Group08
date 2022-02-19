@@ -3,9 +3,11 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import Base from "./base";
+import { FamilyRefreshTokens } from "./family-refresh-tokens.entity";
 import { Role } from "./role.entity";
 
 @Entity({ name: "user" })
@@ -26,12 +28,16 @@ export class User extends Base {
   password: string;
 
   @Column({ type: "varchar", length: 100 })
-  refreshToken: string;
-
-  @Column({ type: "datetime" })
-  dateExpirationRefreshToken: Date;
+  photo: string;
 
   @ManyToMany((type) => Role, (role) => role.users)
   @JoinTable()
   roles: Role[];
+
+  @OneToMany(
+    (type) => FamilyRefreshTokens,
+    (familyRefreshTokens) => familyRefreshTokens.user,
+    { cascade: true }
+  )
+  familyRefreshTokens: FamilyRefreshTokens[];
 }
