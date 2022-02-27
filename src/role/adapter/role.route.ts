@@ -1,7 +1,7 @@
 import RoleUseCase from "@role/application/role.usecase";
 import RoleOperation from "@role/infraestructure/role.operation";
 import express from "express";
-import RoleController from "./Role.controller";
+import RoleController from "./role.controller";
 
 const operation = new RoleOperation();
 const useCase = new RoleUseCase(operation);

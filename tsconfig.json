@@ -11,7 +11,19 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "baseUrl": "./",
-    "outDir": "./cache"
+    "outDir": "./cache",
+    "paths": {
+      "@bootstrap/*": ["src/bootstrap/*"],
+      "@user/*": ["src/user/*"],
+      "@role/*": ["src/role/*"],
+      "@medic/*": ["src/medic/*"],
+      "@driver/*": ["src/driver/*"],
+      "@history/*": ["src/history/*"],
+      "@family-refreshtokens/*": ["src/family-refreshtokens/*"],
+      "@auth/*": ["src/auth/*"],
+      "@shared/*": ["src/shared/*"],
+      "@entities/*": ["src/entities/*"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["src/**/*.ts"],

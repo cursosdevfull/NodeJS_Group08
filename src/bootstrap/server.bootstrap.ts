@@ -11,6 +11,7 @@ export default class implements IBootstrap {
   initialize(): Promise<unknown> {
     return new Promise((resolve, reject) => {
       const server = http.createServer(this.app);
+      console.log("NODE_ENV", process.env.NODE_ENV);
       server
         .listen(env.PORT)
         .on("listening", () => {

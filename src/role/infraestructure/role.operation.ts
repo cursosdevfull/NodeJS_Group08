@@ -1,6 +1,6 @@
 import { Role } from "@entities/role.entity";
-import RoleRepository from "@role/application/Role.repository";
-import { RoleModel } from "@role/domain/Role.model";
+import RoleRepository from "@role/application/role.repository";
+import { RoleModel } from "@role/domain/role.model";
 import BaseOperation from "@shared/infraestructure/base.operation";
 
 export default class RoleOperation

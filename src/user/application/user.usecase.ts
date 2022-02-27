@@ -6,7 +6,7 @@ import { UserService } from "./user.service";
 import RoleRepository from "@role/application/role.repository";
 import { RoleModel } from "@role/domain/role.model";
 import { FamilyRefreshTokens } from "@entities/family-refresh-tokens.entity";
-import { FamilyRefreshTokensModel } from "src/family-refreshtokens/domain/family-refreshtokens.model";
+import { FamilyRefreshTokensModel } from "@family-refreshtokens/domain/family-refreshtokens.model";
 import { UserListDto } from "@user/domain/user-list.dto";
 import AWS from "aws-sdk";
 import yenv from "yenv";

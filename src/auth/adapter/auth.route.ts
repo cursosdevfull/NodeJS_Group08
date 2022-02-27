@@ -1,6 +1,6 @@
 import UserOperation from "@user/infraestructure/user.operation";
 import express from "express";
-import FamilyRefreshTokensOperation from "src/family-refreshtokens/infraestructure/family-refreshtokens.infraestructure";
+import FamilyRefreshTokensOperation from "@family-refreshtokens/infraestructure/family-refreshtokens.infraestructure";
 import { AuthUseCase } from "../application/auth.usecase";
 import AuthController from "./auth.controller";
 
