@@ -48,14 +48,19 @@ class App {
   }
 
   mountRoutes() {
-    this.expressApp.get("/", (req, res) => res.send("Todo ok"));
+    this.expressApp.get("/", (req, res) => res.send("Server is running"));
+    this.expressApp.use("/users", AuthenticationGuard.canActivate, routerUser);
     this.expressApp.use(
-      "/users",
-      /* AuthenticationGuard.canActivate,  */ routerUser
+      "/drivers",
+      AuthenticationGuard.canActivate,
+      routerDriver
     );
-    this.expressApp.use("/drivers", routerDriver);
-    this.expressApp.use("/medics", routerMedic);
-    this.expressApp.use("/roles", routerRole);
+    this.expressApp.use(
+      "/medics",
+      AuthenticationGuard.canActivate,
+      routerMedic
+    );
+    this.expressApp.use("/roles", AuthenticationGuard.canActivate, routerRole);
     this.expressApp.use("/auth", routerAuth);
   }
 
