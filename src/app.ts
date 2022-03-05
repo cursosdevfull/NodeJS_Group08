@@ -6,7 +6,14 @@ import routerRole from "@role/adapter/role.route";
 import routerAuth from "@auth/adapter/auth.route";
 import errorHelper from "@shared/helpers/errors.helper";
 import multer from "multer";
+import helmet from "helmet";
+import yenv from "yenv";
+import permission_policy from "permissions-policy";
 import { AuthenticationGuard } from "@shared/application/guards/authentication.guard";
+
+const env = yenv();
+const domain = env.DOMAIN;
+
 class App {
   expressApp: Application;
 
@@ -23,6 +30,19 @@ class App {
   }
 
   mountMiddlewares() {
+    this.expressApp.use(helmet());
+    this.expressApp.use(
+      permission_policy({
+        features: {
+          geolocation: ["self", `"${domain}"`],
+          camera: ["self", `"${domain}"`],
+          microphone: ["self", `"${domain}"`],
+          notifications: ["self", `"${domain}"`],
+          push: ["self", `"${domain}"`],
+        },
+      })
+    );
+
     this.expressApp.use(express.urlencoded({ extended: true }));
     this.expressApp.use(express.json()); // request.body
   }
