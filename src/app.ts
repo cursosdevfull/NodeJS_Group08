@@ -48,6 +48,7 @@ class App {
   }
 
   mountRoutes() {
+    this.expressApp.get("/", (req, res) => res.send("Todo ok"));
     this.expressApp.use(
       "/users",
       /* AuthenticationGuard.canActivate,  */ routerUser
