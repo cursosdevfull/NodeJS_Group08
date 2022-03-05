@@ -49,7 +49,7 @@ class App {
 
   mountRoutes() {
     this.expressApp.get("/", (req, res) =>
-      res.send("Server is running. That's ok.")
+      res.send("CURSOS DEV: Server is running. That's ok.")
     );
     this.expressApp.use("/users", AuthenticationGuard.canActivate, routerUser);
     this.expressApp.use(
