@@ -1,5 +1,5 @@
-import { ID } from "@shared/values/id.type";
-import Result from "./result.interface";
+import { ID } from '@shared/values/id.type';
+import Result from './result.interface';
 
 export interface BaseRepository<T> {
   list(where: object, relations: string[], order: object): Promise<Result<T>>;

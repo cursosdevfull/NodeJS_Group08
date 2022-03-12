@@ -1,5 +1,5 @@
-import { DriverModel } from "@driver/domain/driver.model";
-import { MedicModel } from "@medic/domain/medic.model";
+import { DriverModel } from '@driver/domain/driver.model';
+import { MedicModel } from '@medic/domain/medic.model';
 
 export interface HistoryModel {
   numberHistory: string;

@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist cache",
     "test": "cross-env NODE_ENV=test jest  --coverage --passWithNoTests",
-    "test:unit": "cross-env NODE_ENV=test jest test/unit/* --coverage=false --passWithNoTests",
+    "test:unit": "cross-env NODE_ENV=test jest test/unit/* --coverage=true --passWithNoTests",
     "test:unique": "cross-env NODE_ENV=test jest --coverage=false  --passWithNoTests",
     "test:integration": "cross-env NODE_ENV=test jest test/integration/* --coverage=false --passWithNoTests",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
@@ -15,6 +15,9 @@
     "test:coverage": "cross-env NODE_ENV=test jest --coverage",
     "test:coverage:unit": "npm run test:unit -- --coverage",
     "test:coverage:integration": "npm run test:integration -- --coverage",
+    "lint:report": "eslint --ext ts src/ -f html -o reports/lint.html",
+    "format": "prettier --write src/**/*.ts",
+    "format:fix": "eslint --ext ts src --fix",
     "dev": "nodemon src/index.ts",
     "build": "npm run clean && gulp minify",
     "server": "cross-env NODE_ENV=production node dist/index.js"
@@ -48,6 +51,7 @@
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.41",
     "uuid": "^8.3.2",
+    "winston": "^3.6.0",
     "yenv": "^3.0.1"
   },
   "devDependencies": {
@@ -60,6 +64,13 @@
     "@types/multer-s3": "^2.7.11",
     "@types/supertest": "^2.0.11",
     "@types/uuid": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "eslint": "^8.11.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-filenames": "^1.3.2",
+    "eslint-plugin-prettier": "^4.0.0",
     "gulp": "^4.0.2",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-ts-alias": "^2.0.0",
@@ -81,6 +92,7 @@
     "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0",
     "tsconfig-paths": "^3.12.0",
-    "typescript": "^4.5.4"
+    "typescript": "^4.5.4",
+    "winston-logstash-transport": "^2.0.0"
   }
 }

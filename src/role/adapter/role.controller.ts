@@ -1,13 +1,13 @@
-import RoleUseCase from "../application/role.usecase";
-import { RoleModel } from "../domain/role.model";
-import { Request, Response } from "express";
+import RoleUseCase from '../application/role.usecase';
+import { RoleModel } from '../domain/role.model';
+import { Request, Response } from 'express';
 
 export default class RoleController {
   constructor(private useCase: RoleUseCase) {}
 
   async list(req: Request, res: Response) {
     const results = await this.useCase.list({}, [], {
-      name: "ASC",
+      name: 'ASC',
     });
 
     res.json(results);
@@ -23,7 +23,7 @@ export default class RoleController {
   async getPage(req: Request, res: Response) {
     const page = +req.params.page;
     const results = await this.useCase.getPage(page, {}, [], {
-      name: "ASC",
+      name: 'ASC',
     });
 
     res.json(results);

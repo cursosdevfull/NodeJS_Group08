@@ -1,4 +1,4 @@
-import { UserModel } from "@user/domain/user.model";
+import { UserModel } from '@user/domain/user.model';
 
 export interface FamilyRefreshTokensModel {
   id?: number;

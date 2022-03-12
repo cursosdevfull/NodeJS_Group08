@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  master:
+    container_name: 'master'
+    build: .
+    ports:
+      - '8089:8089'
+    command: '--host=http://cursonode08-env-dev.eba-zzj7pmzc.us-east-2.elasticbeanstalk.com --master'
+
+  slave:
+    build: .
+    command: '--host=http://cursonode08-env-dev.eba-zzj7pmzc.us-east-2.elasticbeanstalk.com --slave --master-host=master'

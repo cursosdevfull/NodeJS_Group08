@@ -1,7 +1,8 @@
-import Result from "../../shared/application/result.interface";
-import { getRepository, ObjectType, Repository } from "typeorm";
-import { ResponseDto } from "../application/response.dto";
-import * as _ from "lodash";
+import Result from '../../shared/application/result.interface';
+import { getRepository, ObjectType, Repository } from 'typeorm';
+import { ResponseDto } from '../application/response.dto';
+import * as _ from 'lodash';
+import { Trace } from '../../shared/helpers/trace.helper';
 
 export default abstract class BaseOperation<T> {
   constructor(private entity: ObjectType<T>) {}
@@ -14,14 +15,14 @@ export default abstract class BaseOperation<T> {
     const repository: Repository<T> = getRepository(this.entity);
     const data: T[] = await repository.find({ where, relations, order });
 
-    return ResponseDto.format("", data);
+    return ResponseDto.format(Trace.getTraceId(), data);
   }
 
   async getOne(where: object, relations: string[]): Promise<Result<T>> {
     const repository: Repository<T> = getRepository(this.entity);
     const data: T = await repository.findOne({ where, relations });
 
-    return ResponseDto.format("", data);
+    return ResponseDto.format(Trace.getTraceId(), data);
   }
 
   async getPage(
@@ -40,7 +41,7 @@ export default abstract class BaseOperation<T> {
       take: pageSize,
     });
 
-    return ResponseDto.format("", data, total);
+    return ResponseDto.format(Trace.getTraceId(), data, total);
   }
 
   async insert(entity: T): Promise<Result<T>> {
@@ -48,7 +49,7 @@ export default abstract class BaseOperation<T> {
     const instance = repository.create(entity);
     const data: T = await repository.save(instance);
 
-    return ResponseDto.format("", data);
+    return ResponseDto.format(Trace.getTraceId(), data);
   }
 
   async update(
@@ -65,10 +66,10 @@ export default abstract class BaseOperation<T> {
 
     await repository.save(recordsToUpdate);
 
-    return ResponseDto.format("", recordsToUpdate);
+    return ResponseDto.format(Trace.getTraceId(), recordsToUpdate);
   }
 
   delete(where: object): Promise<Result<T>> {
-    throw new Error("Not implemented");
+    throw new Error('Not implemented');
   }
 }

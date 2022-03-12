@@ -1,5 +1,5 @@
-import { RoleModel } from "@role/domain/role.model";
-import { FamilyRefreshTokensModel } from "@family-refreshtokens/domain/family-refreshtokens.model";
+import { RoleModel } from '@role/domain/role.model';
+import { FamilyRefreshTokensModel } from '@family-refreshtokens/domain/family-refreshtokens.model';
 
 export interface UserModel {
   id: number;

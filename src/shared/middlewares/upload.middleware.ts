@@ -1,10 +1,10 @@
-import multer from "multer";
-import multer_s3 from "multer-s3";
-import AWS from "aws-sdk";
-import yenv from "yenv";
-import { IError } from "@shared/helpers/errors.helper";
-import { Request, NextFunction, Response } from "express";
-import { UploadOptions } from "../../shared/application/upload-builder";
+import multer from 'multer';
+import multer_s3 from 'multer-s3';
+import AWS from 'aws-sdk';
+import yenv from 'yenv';
+import { IError } from '@shared/helpers/errors.helper';
+import { Request, NextFunction, Response } from 'express';
+import { UploadOptions } from '../../shared/application/upload-builder';
 
 const env = yenv();
 
@@ -26,7 +26,7 @@ export class FactoryAWS implements IUploadImage, IUploadMultiple {
       storage: multer_s3({
         s3: this.S3,
         bucket: env.S3.bucketName,
-        acl: options.isPublic ? "public-read" : "",
+        acl: options.isPublic ? 'public-read' : '',
         metadata(req, file, cb) {
           cb(null, { fieldName: file.fieldname });
         },
@@ -36,13 +36,13 @@ export class FactoryAWS implements IUploadImage, IUploadMultiple {
           const fileSize = file.size;
 
           if (!isFileAllowed) {
-            const error: IError = new Error("File type not allowed");
-            error.code = "LIMIT_FILE_TYPES";
+            const error: IError = new Error('File type not allowed');
+            error.code = 'LIMIT_FILE_TYPES';
             error.status = 422;
             return cb(error, null);
           }
 
-          const partsFile = file.originalname.split("."); // nombreArchivo.extension
+          const partsFile = file.originalname.split('.'); // nombreArchivo.extension
           const newName = Date.now().toString();
           const extension = partsFile[partsFile.length - 1];
           const newFileName = `${options.directory}/${newName}.${extension}`;

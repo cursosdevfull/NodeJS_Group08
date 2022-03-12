@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 export const schemas = {
   INSERT: {
@@ -8,7 +8,7 @@ export const schemas = {
       maternal_surname: Joi.string().required(),
       cmp: Joi.number().min(2000).max(4000).required(),
       document: Joi.string()
-        .pattern(new RegExp("^[a-zA-Z0-9]{8,12}$"))
+        .pattern(new RegExp('^[a-zA-Z0-9]{8,12}$'))
         .required(),
       typeDocument: Joi.number().valid(1, 2, 3).required(),
     }),
@@ -22,7 +22,7 @@ export const schemas = {
       paternal_surname: Joi.string(),
       maternal_surname: Joi.string(),
       cmp: Joi.number().min(2000).max(4000),
-      document: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{8,12}$")),
+      document: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{8,12}$')),
       typeDocument: Joi.number().valid(1, 2, 3),
     }),
   },

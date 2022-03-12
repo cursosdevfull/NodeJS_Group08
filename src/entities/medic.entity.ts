@@ -1,17 +1,17 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import BasePersonal from "./base-personal";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import BasePersonal from './base-personal';
 
-@Entity({ name: "medic" })
+@Entity({ name: 'medic' })
 export class Medic extends BasePersonal {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: "varchar", length: 10 })
+  @Column({ type: 'varchar', length: 10 })
   cmp: string;
 
-  @Column({ type: "varchar", length: 20 })
+  @Column({ type: 'varchar', length: 20 })
   document: string;
 
-  @Column({ type: "int" })
+  @Column({ type: 'int' })
   typeDocument: number;
 }

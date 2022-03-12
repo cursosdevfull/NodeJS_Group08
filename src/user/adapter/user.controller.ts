@@ -1,14 +1,14 @@
-import Result from "@shared/application/result.interface";
-import { IError } from "@shared/helpers/errors.helper";
-import UserUseCase from "@user/application/user.usecase";
-import { UserModel } from "@user/domain/user.model";
-import { Request, Response } from "express";
-import { CustomException } from "../../shared/exceptions/custom.exception";
+import Result from '@shared/application/result.interface';
+import { IError } from '@shared/helpers/errors.helper';
+import UserUseCase from '@user/application/user.usecase';
+import { UserModel } from '@user/domain/user.model';
+import { Request, Response } from 'express';
+import { CustomException } from '../../shared/exceptions/custom.exception';
 
 const functionReject = () =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
-      const error: IError = new Error("error de promesa");
+      const error: IError = new Error('error de promesa');
       error.status = 502;
       reject(error);
     }, 2000);
@@ -19,8 +19,8 @@ export default class UserController {
 
   async list(req: Request, res: Response) {
     const results: Result<UserModel> = await this.useCase.list({}, [], {
-      lastname: "ASC",
-      name: "ASC",
+      lastname: 'ASC',
+      name: 'ASC',
     });
     res.json(results);
   }
@@ -35,16 +35,16 @@ export default class UserController {
   async getPhoto(req: Request, res: Response) {
     const where = { id: +req.params.id };
     const results = await this.useCase.getPhoto(where);
-    const obj = Buffer.from(results.Body).toString("utf-8");
+    const obj = Buffer.from(results.Body).toString('utf-8');
 
-    res.type("image/png").send(obj);
+    res.type('image/png').send(obj);
   }
 
   async getPage(req: Request, res: Response) {
     const page = +req.params.page;
     const results = await this.useCase.getPage(page, {}, [], {
-      lastname: "ASC",
-      name: "ASC",
+      lastname: 'ASC',
+      name: 'ASC',
     });
 
     res.json(results);

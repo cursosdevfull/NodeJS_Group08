@@ -1,6 +1,6 @@
-import Result from "@shared/application/result.interface";
-import { UserModel } from "./user.model";
-import yenv from "yenv";
+import Result from '@shared/application/result.interface';
+import { UserModel } from './user.model';
+import yenv from 'yenv';
 
 const env = yenv();
 

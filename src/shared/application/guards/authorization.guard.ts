@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from 'express';
 
 export class AuthorizationGuard {
   static canActivate(...actionsAllowed: string[]) {
@@ -10,8 +10,8 @@ export class AuthorizationGuard {
         .reduce((accum: any, actions: string) => {
           accum += actions;
           return accum;
-        }, "") // "USERS_LIST,USERS_INSERT,MEDICS_LIST"
-        .split(","); // ["USERS_LIST", "USERS_INSERT", "MEDICS_LIST"]
+        }, '') // "USERS_LIST,USERS_INSERT,MEDICS_LIST"
+        .split(','); // ["USERS_LIST", "USERS_INSERT", "MEDICS_LIST"]
 
       const listActionsUnique = [...new Set(listActions)];
 
@@ -22,7 +22,7 @@ export class AuthorizationGuard {
       if (matched) {
         next();
       } else {
-        res.status(403).send("Forbidden");
+        res.status(403).send('Forbidden');
       }
 
       /* let actionMatched = false;

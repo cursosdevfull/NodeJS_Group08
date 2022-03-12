@@ -1,7 +1,8 @@
-import { ID } from "@shared/values/id.type";
-import { BaseRepository } from "./base.repository";
-import Result from "./result.interface";
-import yenv from "yenv";
+import { BaseRepository } from './base.repository';
+import Result from './result.interface';
+import yenv from 'yenv';
+import logger from '../../shared/helpers/logging.helper';
+import { Trace } from '../../shared/helpers/trace.helper';
 
 const env = yenv();
 
@@ -14,6 +15,13 @@ export class BaseUseCase<T, U extends BaseRepository<T>> {
     order: object = {}
   ): Promise<Result<T>> {
     where = { ...where, active: true };
+    logger.info({
+      typeElement: 'BaseUseCase',
+      typeAction: 'list',
+      traceId: Trace.getTraceId(),
+      message: 'Listing all',
+    });
+
     return this.repository.list(where, relations, order);
   }
 

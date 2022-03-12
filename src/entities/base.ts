@@ -1,13 +1,13 @@
-import { BeforeInsert, BeforeUpdate, Column } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column } from 'typeorm';
 
 export default class Base {
-  @Column({ type: "datetime" })
+  @Column({ type: 'datetime' })
   dateCreated: Date;
 
-  @Column({ type: "datetime" })
+  @Column({ type: 'datetime' })
   dateUpdated: Date;
 
-  @Column({ type: "boolean", default: true })
+  @Column({ type: 'boolean', default: true })
   active: boolean;
 
   @BeforeInsert()

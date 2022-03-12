@@ -1,7 +1,7 @@
-import { MedicModel } from "../domain/medic.model";
-import { BaseUseCase } from "../../shared/application/base.usecase";
-import Result from "../../shared/application/result.interface";
-import MedicRepository from "./medic.repository";
+import { MedicModel } from '../domain/medic.model';
+import { BaseUseCase } from '../../shared/application/base.usecase';
+import Result from '../../shared/application/result.interface';
+import MedicRepository from './medic.repository';
 
 export default class MedicUseCase extends BaseUseCase<
   MedicModel,

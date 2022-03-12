@@ -1,5 +1,5 @@
-import RedisBootstrap from "../../bootstrap/redis.bootstrap";
-import { NextFunction, Request, Response } from "express";
+import RedisBootstrap from '../../bootstrap/redis.bootstrap';
+import { NextFunction, Request, Response } from 'express';
 
 export default class CacheRedis {
   static handle(prefix: string) {
@@ -27,7 +27,7 @@ export default class CacheRedis {
       const results = await RedisBootstrap.get(key);
 
       if (results) {
-        console.log("Ejecución desde Redis");
+        console.log('Ejecución desde Redis');
         res.json(JSON.parse(results));
       } else {
         res.locals.cacheKey = key;

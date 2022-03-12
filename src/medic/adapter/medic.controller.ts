@@ -1,16 +1,26 @@
-import MedicUseCase from "../application/medic.usecase";
-import { MedicModel } from "../domain/medic.model";
-import { Request, Response } from "express";
-import { ICache } from "../../shared/interfaces/cache.interface";
+import MedicUseCase from '../application/medic.usecase';
+import { MedicModel } from '../domain/medic.model';
+import { Request, Response } from 'express';
+import { ICache } from '../../shared/interfaces/cache.interface';
+import logger from '../../shared/helpers/logging.helper';
+import { Trace } from '../../shared/helpers/trace.helper';
 
 export default class MedicController {
   constructor(private useCase: MedicUseCase, private cache: ICache) {}
 
   async list(req: Request, res: Response) {
+    console.log('list controller medic');
+    logger.info({
+      typeElement: 'MedicController',
+      typeAction: 'list',
+      query: JSON.stringify({ active: true, erased: 10 }),
+      traceId: Trace.getTraceId(true),
+      message: 'Listing all medics',
+    });
     const results = await this.useCase.list({}, [], {
-      paternal_surname: "ASC",
-      maternal_surname: "ASC",
-      name: "ASC",
+      paternal_surname: 'ASC',
+      maternal_surname: 'ASC',
+      name: 'ASC',
     });
 
     this.cache.set(res.locals.cacheKey, JSON.stringify(results));
@@ -28,9 +38,9 @@ export default class MedicController {
   async getPage(req: Request, res: Response) {
     const page = +req.params.page;
     const results = await this.useCase.getPage(page, {}, [], {
-      paternal_surname: "ASC",
-      maternal_surname: "ASC",
-      name: "ASC",
+      paternal_surname: 'ASC',
+      maternal_surname: 'ASC',
+      name: 'ASC',
     });
 
     res.json(results);
@@ -49,7 +59,7 @@ export default class MedicController {
 
     const results = await this.useCase.insert(medic);
 
-    await this.cache.clear("MEDIC_");
+    await this.cache.clear('MEDIC_');
 
     res.json(results);
   }

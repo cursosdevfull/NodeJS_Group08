@@ -1,12 +1,12 @@
-import Result from "../../shared/application/result.interface";
-import { ResponseDto } from "../../shared/application/response.dto";
-import UserRepository from "../../user/application/user.repository";
-import { UserService } from "../../user/application/user.service";
-import { UserModel } from "../../user/domain/user.model";
-import { TokensModel } from "../domain/tokens.model";
-import { FamilyRefreshTokens } from "../../entities/family-refresh-tokens.entity";
-import FamilyRefreshTokensRepository from "../../family-refreshtokens/application/family-refreshtokens.repository";
-import { FamilyRefreshTokensModel } from "../../family-refreshtokens/domain/family-refreshtokens.model";
+import Result from '../../shared/application/result.interface';
+import { ResponseDto } from '../../shared/application/response.dto';
+import UserRepository from '../../user/application/user.repository';
+import { UserService } from '../../user/application/user.service';
+import { UserModel } from '../../user/domain/user.model';
+import { TokensModel } from '../domain/tokens.model';
+import { FamilyRefreshTokens } from '../../entities/family-refresh-tokens.entity';
+import FamilyRefreshTokensRepository from '../../family-refreshtokens/application/family-refreshtokens.repository';
+import { FamilyRefreshTokensModel } from '../../family-refreshtokens/domain/family-refreshtokens.model';
 
 export class AuthUseCase {
   constructor(
@@ -17,7 +17,7 @@ export class AuthUseCase {
   async login(user: Partial<UserModel>): Promise<Result<TokensModel>> {
     const result: Result<UserModel> = await this.repositoryUser.getOne(
       { email: user.email },
-      ["roles", "familyRefreshTokens"]
+      ['roles', 'familyRefreshTokens']
     );
     const userMatched: UserModel = result.payload.data as UserModel;
 
@@ -55,8 +55,7 @@ export class AuthUseCase {
           accessToken: UserService.generateAccessToken(userMatched),
           refreshToken: newValue,
         };
-        return ResponseDto.format("", tokens);
-      } else {
+        return ResponseDto.format('', tokens);
       }
     } else {
       return null;
@@ -67,7 +66,7 @@ export class AuthUseCase {
     const result: Result<FamilyRefreshTokensModel> =
       await this.repositoryFamilyRefreshTokens.getOne(
         { refreshToken, status: true },
-        ["user"]
+        ['user']
       );
 
     const refreshTokenMatched: FamilyRefreshTokensModel = result.payload
@@ -82,7 +81,7 @@ export class AuthUseCase {
 
       const user: Result<UserModel> = await this.repositoryUser.getOne(
         { id: refreshTokenMatched.user.id },
-        ["familyRefreshTokens"]
+        ['familyRefreshTokens']
       );
 
       const newValue = UserService.generateRefreshToken();
@@ -104,9 +103,8 @@ export class AuthUseCase {
         accessToken: UserService.generateAccessToken(userMatched),
         refreshToken: newValue,
       };
-      return ResponseDto.format("", tokens);
-    } else {
-      return null;
+      return ResponseDto.format('', tokens);
     }
+    return null;
   }
 }

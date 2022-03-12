@@ -1,52 +1,52 @@
 export class UploadBuilder {
-  private _fieldName: string;
-  private _maxFileSize: number;
-  private _directory: string;
-  private _isPublic: boolean;
-  private _mimeTypesAllowed: string[];
+  private vfieldName: string;
+  private vmaxFileSize: number;
+  private vdirectory: string;
+  private visPublic: boolean;
+  private vmimeTypesAllowed: string[];
 
   get fieldName() {
-    return this._fieldName;
+    return this.vfieldName;
   }
 
   get maxFileSize() {
-    return this._maxFileSize;
+    return this.vmaxFileSize;
   }
 
   get directory() {
-    return this._directory;
+    return this.vdirectory;
   }
 
   get isPublic() {
-    return this._isPublic;
+    return this.visPublic;
   }
 
   get mimeTypesAllowed() {
-    return this._mimeTypesAllowed;
+    return this.vmimeTypesAllowed;
   }
 
   addFieldName(fieldName: string) {
-    this._fieldName = fieldName;
+    this.vfieldName = fieldName;
     return this;
   }
 
   addMaxFileSize(maxFileSize: number) {
-    this._maxFileSize = maxFileSize;
+    this.vmaxFileSize = maxFileSize;
     return this;
   }
 
   addDirectory(directory: string) {
-    this._directory = directory;
+    this.vdirectory = directory;
     return this;
   }
 
   addIsPublic(isPublic: boolean) {
-    this._isPublic = isPublic;
+    this.visPublic = isPublic;
     return this;
   }
 
   addMimeTypesAllowed(mimeTypesAllowed: string[]) {
-    this._mimeTypesAllowed = mimeTypesAllowed;
+    this.vmimeTypesAllowed = mimeTypesAllowed;
     return this;
   }
 

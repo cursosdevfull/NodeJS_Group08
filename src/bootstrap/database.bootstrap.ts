@@ -1,6 +1,7 @@
-import IBootstrap from "./bootstrap.interface";
-import yenv from "yenv";
-import { createConnection } from "typeorm";
+import IBootstrap from './bootstrap.interface';
+import yenv from 'yenv';
+import { createConnection } from 'typeorm';
+import logger from '../shared/helpers/logging.helper';
 
 const env = yenv();
 let client: any;
@@ -22,7 +23,7 @@ export default class DatabaseBootstrap implements IBootstrap {
 
       createConnection(parametersConnection).then(
         (connection) => {
-          console.log("Connected to database");
+          logger.info('Connected to database');
           client = connection;
           resolve(true);
         },
@@ -38,6 +39,8 @@ export default class DatabaseBootstrap implements IBootstrap {
   async closeConnection(): Promise<void> {
     try {
       await client.close();
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

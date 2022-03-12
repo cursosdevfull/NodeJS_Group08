@@ -1,8 +1,8 @@
-import { TokensModel } from "../domain/tokens.model";
-import Result from "../../shared/application/result.interface";
-import { UserModel } from "../../user/domain/user.model";
-import { Request, Response } from "express";
-import { AuthUseCase } from "../application/auth.usecase";
+import { TokensModel } from '../domain/tokens.model';
+import Result from '../../shared/application/result.interface';
+import { UserModel } from '../../user/domain/user.model';
+import { Request, Response } from 'express';
+import { AuthUseCase } from '../application/auth.usecase';
 
 export default class AuthController {
   constructor(private useCase: AuthUseCase) {}
@@ -18,7 +18,7 @@ export default class AuthController {
       return res.json(results);
     }
 
-    res.status(401).send("User not found");
+    res.status(401).send('User not found');
   }
 
   async getNewAccessToken(req: Request, res: Response) {
@@ -31,6 +31,6 @@ export default class AuthController {
       return res.json(result);
     }
 
-    return res.status(404).send("User Not found");
+    return res.status(404).send('User Not found');
   }
 }

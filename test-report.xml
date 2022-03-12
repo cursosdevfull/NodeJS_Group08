@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="D:\Cursos\node08\test\integration\medic.route.spec.ts">
-    <testCase name="medic.route get /medics without token" duration="36"/>
+  <file path="D:\Cursos\node08\test\unit\medic.controller.spec.ts">
+    <testCase name="medic.controller list" duration="37"/>
+    <testCase name="medic.controller getOne" duration="2"/>
+    <testCase name="medic.controller getPage" duration="1"/>
+    <testCase name="medic.controller insert" duration="1"/>
+    <testCase name="medic.controller update" duration="1"/>
+    <testCase name="medic.controller delete" duration="1"/>
+  </file>
+  <file path="D:\Cursos\node08\test\unit\medic.usecase.spec.ts">
+    <testCase name="medic.usecase list" duration="7"/>
   </file>
 </testExecutions>

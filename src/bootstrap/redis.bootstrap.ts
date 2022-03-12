@@ -1,6 +1,7 @@
-import IBootstrap from "./bootstrap.interface";
-import IORedis from "ioredis";
-import yenv from "yenv";
+import IBootstrap from './bootstrap.interface';
+import IORedis from 'ioredis';
+import yenv from 'yenv';
+import logger from '../shared/helpers/logging.helper';
 
 const env = yenv();
 
@@ -21,11 +22,11 @@ export default class RedisBootstrap implements IBootstrap {
       this.client = new IORedis(connectionParams);
 
       this.client
-        .on("connect", () => {
-          console.log("Connected to Redis");
+        .on('connect', () => {
+          logger.info('Connected to Redis');
           resolve(true);
         })
-        .on("error", (error) => {
+        .on('error', (error) => {
           reject(error);
         });
 
@@ -40,7 +41,9 @@ export default class RedisBootstrap implements IBootstrap {
   async closeConnection(): Promise<void> {
     try {
       await client.close();
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   static async get(key: string) {
@@ -48,11 +51,11 @@ export default class RedisBootstrap implements IBootstrap {
   }
 
   static async set(key: string, value: any) {
-    await client.set(key, value, "PX", 24 * 60 * 60 * 1000);
+    await client.set(key, value, 'PX', 24 * 60 * 60 * 1000);
   }
 
-  static async clear(prefix: string = "") {
-    const keys = await client.keys(prefix + "*"); // MEDIC_*
+  static async clear(prefix = '') {
+    const keys = await client.keys(prefix + '*'); // MEDIC_*
     const pipeline = client.pipeline();
 
     keys.forEach((key: string) => {
