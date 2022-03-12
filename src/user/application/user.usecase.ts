@@ -1,13 +1,13 @@
-import { UserModel } from "@user/domain/user.model";
-import { BaseUseCase } from "@shared/application/base.usecase";
+import { UserModel } from "../domain/user.model";
+import { BaseUseCase } from "../../shared/application/base.usecase";
 import UserRepository from "./user.repository";
-import Result from "@shared/application/result.interface";
+import Result from "../../shared/application/result.interface";
 import { UserService } from "./user.service";
-import RoleRepository from "@role/application/role.repository";
-import { RoleModel } from "@role/domain/role.model";
-import { FamilyRefreshTokens } from "@entities/family-refresh-tokens.entity";
-import { FamilyRefreshTokensModel } from "@family-refreshtokens/domain/family-refreshtokens.model";
-import { UserListDto } from "@user/domain/user-list.dto";
+import RoleRepository from "../../role/application/role.repository";
+import { RoleModel } from "../../role/domain/role.model";
+import { FamilyRefreshTokens } from "../../entities/family-refresh-tokens.entity";
+import { FamilyRefreshTokensModel } from "../../family-refreshtokens/domain/family-refreshtokens.model";
+import { UserListDto } from "../domain/user-list.dto";
 import AWS from "aws-sdk";
 import yenv from "yenv";
 

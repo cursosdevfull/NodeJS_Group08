@@ -1,14 +1,15 @@
-import MedicUseCase from "@medic/application/medic.usecase";
-import MedicOperation from "@medic/infraestructure/medic.operation";
-import CacheRedis from "@shared/middlewares/cache.middleware";
-import { Validators } from "@shared/middlewares/validate.middleware";
+import RedisBootstrap from "../../bootstrap/redis.bootstrap";
+import MedicUseCase from "../application/medic.usecase";
+import MedicOperation from "../infraestructure/medic.operation";
+import CacheRedis from "../../shared/middlewares/cache.middleware";
+import { Validators } from "../../shared/middlewares/validate.middleware";
 import express from "express";
 import MedicController from "./medic.controller";
 import { schemas } from "./medic.schema";
 
 const operation = new MedicOperation();
 const useCase = new MedicUseCase(operation);
-const controller = new MedicController(useCase);
+const controller = new MedicController(useCase, RedisBootstrap);
 
 const route = express.Router();
 

@@ -34,4 +34,10 @@ export default class DatabaseBootstrap implements IBootstrap {
   getConnection() {
     return client;
   }
+
+  async closeConnection(): Promise<void> {
+    try {
+      await client.close();
+    } catch (error) {}
+  }
 }

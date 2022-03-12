@@ -1,4 +1,4 @@
-import { BaseUseCase } from "@shared/application/base.usecase";
+import { BaseUseCase } from "../../shared/application/base.usecase";
 import { FamilyRefreshTokensModel } from "../domain/family-refreshtokens.model";
 import FamilyRefreshTokensRepository from "./family-refreshtokens.repository";
 

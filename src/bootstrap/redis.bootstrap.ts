@@ -37,6 +37,12 @@ export default class RedisBootstrap implements IBootstrap {
     return this.client;
   }
 
+  async closeConnection(): Promise<void> {
+    try {
+      await client.close();
+    } catch (error) {}
+  }
+
   static async get(key: string) {
     return await client.get(key);
   }

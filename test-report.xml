@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="D:\Cursos\node08\test\integration\medic.route.spec.ts">
+    <testCase name="medic.route get /medics without token" duration="36"/>
+  </file>
+</testExecutions>

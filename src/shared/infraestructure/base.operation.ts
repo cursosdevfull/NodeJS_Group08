@@ -1,4 +1,4 @@
-import Result from "@shared/application/result.interface";
+import Result from "../../shared/application/result.interface";
 import { getRepository, ObjectType, Repository } from "typeorm";
 import { ResponseDto } from "../application/response.dto";
 import * as _ from "lodash";

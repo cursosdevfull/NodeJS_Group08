@@ -1,7 +1,6 @@
-import { TokensModel } from "@auth/domain/tokens.model";
-import Result from "@shared/application/result.interface";
-import UserUseCase from "@user/application/user.usecase";
-import { UserModel } from "@user/domain/user.model";
+import { TokensModel } from "../domain/tokens.model";
+import Result from "../../shared/application/result.interface";
+import { UserModel } from "../../user/domain/user.model";
 import { Request, Response } from "express";
 import { AuthUseCase } from "../application/auth.usecase";
 

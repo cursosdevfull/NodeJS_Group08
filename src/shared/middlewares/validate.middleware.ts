@@ -1,4 +1,4 @@
-import { IError } from "@shared/helpers/errors.helper";
+import { IError } from "../../shared/helpers/errors.helper";
 import { Request, Response, NextFunction } from "express";
 
 export class Validators {

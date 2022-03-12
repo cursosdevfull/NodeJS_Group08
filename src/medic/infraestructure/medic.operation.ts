@@ -1,10 +1,11 @@
-import { Medic } from "@entities/medic.entity";
-import MedicRepository from "@medic/application/medic.repository";
-import { MedicModel } from "@medic/domain/medic.model";
-import Result from "@shared/application/result.interface";
-import BaseOperation from "@shared/infraestructure/base.operation";
-import { ResponseDto } from "@shared/application/response.dto";
+import { Medic } from "../../entities/medic.entity";
+import MedicRepository from "../application/medic.repository";
+import { MedicModel } from "../domain/medic.model";
+
+import BaseOperation from "../../shared/infraestructure/base.operation";
+import { ResponseDto } from "../../shared/application/response.dto";
 import { getRepository, Repository } from "typeorm";
+import Result from "../../shared/application/result.interface";
 
 export default class MedicOperation
   extends BaseOperation<MedicModel>

@@ -1,12 +1,12 @@
-import Result from "@shared/application/result.interface";
-import { ResponseDto } from "@shared/application/response.dto";
-import UserRepository from "@user/application/user.repository";
-import { UserService } from "@user/application/user.service";
-import { UserModel } from "@user/domain/user.model";
+import Result from "../../shared/application/result.interface";
+import { ResponseDto } from "../../shared/application/response.dto";
+import UserRepository from "../../user/application/user.repository";
+import { UserService } from "../../user/application/user.service";
+import { UserModel } from "../../user/domain/user.model";
 import { TokensModel } from "../domain/tokens.model";
-import { FamilyRefreshTokens } from "@entities/family-refresh-tokens.entity";
-import FamilyRefreshTokensRepository from "@family-refreshtokens/application/family-refreshtokens.repository";
-import { FamilyRefreshTokensModel } from "@family-refreshtokens/domain/family-refreshtokens.model";
+import { FamilyRefreshTokens } from "../../entities/family-refresh-tokens.entity";
+import FamilyRefreshTokensRepository from "../../family-refreshtokens/application/family-refreshtokens.repository";
+import { FamilyRefreshTokensModel } from "../../family-refreshtokens/domain/family-refreshtokens.model";
 
 export class AuthUseCase {
   constructor(

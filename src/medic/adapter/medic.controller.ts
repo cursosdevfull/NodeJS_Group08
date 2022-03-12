@@ -1,10 +1,10 @@
-import RedisBootstrap from "@bootstrap/redis.bootstrap";
-import MedicUseCase from "@medic/application/medic.usecase";
-import { MedicModel } from "@medic/domain/medic.model";
+import MedicUseCase from "../application/medic.usecase";
+import { MedicModel } from "../domain/medic.model";
 import { Request, Response } from "express";
+import { ICache } from "../../shared/interfaces/cache.interface";
 
 export default class MedicController {
-  constructor(private useCase: MedicUseCase) {}
+  constructor(private useCase: MedicUseCase, private cache: ICache) {}
 
   async list(req: Request, res: Response) {
     const results = await this.useCase.list({}, [], {
@@ -13,9 +13,7 @@ export default class MedicController {
       name: "ASC",
     });
 
-    console.log("Almacenando en Redis");
-
-    RedisBootstrap.set(res.locals.cacheKey, JSON.stringify(results));
+    this.cache.set(res.locals.cacheKey, JSON.stringify(results));
 
     res.json(results);
   }
@@ -51,7 +49,7 @@ export default class MedicController {
 
     const results = await this.useCase.insert(medic);
 
-    await RedisBootstrap.clear("MEDIC_");
+    await this.cache.clear("MEDIC_");
 
     res.json(results);
   }

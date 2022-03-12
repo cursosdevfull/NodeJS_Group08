@@ -1,20 +1,18 @@
-import RoleOperation from "@role/infraestructure/role.operation";
-import { AuthenticationGuard } from "@shared/application/guards/authentication.guard";
-import { AuthorizationGuard } from "@shared/application/guards/authorization.guard";
-import UserUseCase from "@user/application/user.usecase";
-import UserOperation from "@user/infraestructure/user.operation";
+import RoleOperation from "../../role/infraestructure/role.operation";
+
+import UserUseCase from "../application/user.usecase";
+import UserOperation from "../infraestructure/user.operation";
 import express from "express";
 import UserController from "./user.controller";
-import errorHandler from "@shared/helpers/errors.helper";
-import FamilyRefreshTokensOperation from "@family-refreshtokens/infraestructure/family-refreshtokens.infraestructure";
+import errorHandler from "../../shared/helpers/errors.helper";
+
 /* import { UploadMiddleware } from "@shared/middlewares/upload.middleware"; */
-import { UploadBuilder } from "@shared/application/upload-builder";
+import { UploadBuilder } from "../../shared/application/upload-builder";
 import {
   FactoryAWS,
   IUploadImage,
   IUploadMultiple,
-} from "@shared/middlewares/upload.middleware";
-import { FactoryGoogle } from "../../shared/middlewares/upload.middleware";
+} from "../../shared/middlewares/upload.middleware";
 
 const operationUser = new UserOperation();
 const operationRole = new RoleOperation();

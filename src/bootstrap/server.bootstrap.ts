@@ -1,6 +1,6 @@
 import { Application } from "express";
 import http from "http";
-import IBootstrap from "@bootstrap/bootstrap.interface";
+import IBootstrap from "./bootstrap.interface";
 import yenv from "yenv";
 
 const env = yenv();

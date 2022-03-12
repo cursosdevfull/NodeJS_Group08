@@ -1,5 +1,5 @@
-import RoleUseCase from "@role/application/role.usecase";
-import RoleOperation from "@role/infraestructure/role.operation";
+import RoleUseCase from "../application/role.usecase";
+import RoleOperation from "../infraestructure/role.operation";
 import express from "express";
 import RoleController from "./role.controller";
 

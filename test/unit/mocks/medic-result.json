@@ -1,0 +1,16 @@
+{
+  "trace": "eaf6ab11-e6c7-4c3f-b7fe-1e8562d219d3",
+  "payload": {
+    "data": [
+      {
+        "name": "John",
+        "paternal_surname": "Doe",
+        "maternal_surname": "Doe",
+        "cmp": "123456789",
+        "document": "123456789",
+        "typeDocument": "4"
+      }
+    ],
+    "total": 1
+  }
+}

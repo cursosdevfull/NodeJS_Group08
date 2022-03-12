@@ -4,10 +4,7 @@ import AWS from "aws-sdk";
 import yenv from "yenv";
 import { IError } from "@shared/helpers/errors.helper";
 import { Request, NextFunction, Response } from "express";
-import { IUpload } from "@shared/interfaces/upload.interface";
-import { UploadOptions } from "@shared/application/upload-builder";
-import { ParamsDictionary } from "express-serve-static-core";
-import { ParsedQs } from "qs";
+import { UploadOptions } from "../../shared/application/upload-builder";
 
 const env = yenv();
 
